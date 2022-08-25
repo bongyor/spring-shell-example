@@ -1,7 +1,8 @@
 package com.example.springshellexample.tesztform
 
+import com.example.springshellexample.ServerPortService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.shell.standard.ShellComponent
 import org.springframework.shell.standard.ShellMethod
 import org.springframework.stereotype.Controller
@@ -24,8 +25,10 @@ data class FormCommand(
 @ShellComponent
 @Controller
 class TesztFormController {
+
+
     @Autowired
-    private val webServerAppCtxt: ServletWebServerApplicationContext? = null
+    private lateinit var serverPortService: ServerPortService
 
     @ShellMethod("Teszt form linkjének megjelenítése")
     fun tesztFormShell() {
@@ -35,13 +38,15 @@ class TesztFormController {
             InetAddress.getLoopbackAddress().hostAddress,
             InetAddress.getLoopbackAddress().hostName,
         ).forEach {
-            println("http://$it:${webServerAppCtxt!!.webServer.port}/tesztform")
+            println(tesztFormUrl(it))
         }
     }
 
+    fun tesztFormUrl(it: String?) = "http://$it:${serverPortService.getPort()}/tesztform"
+
     @GetMapping("/tesztform")
     fun tesztForm(): String {
-        return "tesztform";
+        return "tesztform"
     }
 
     @PostMapping("/tesztform")

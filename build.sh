@@ -5,6 +5,7 @@ IFS=$'\n\t'
 docker build -t spring-shell-example-builder .
 docker volume create spring-shell-example-builder-m2
 docker run \
+  -v /var/run/docker.sock:/var/run/docker.sock \
   -v "$(pwd)":/app-ro:ro \
   -v "$(pwd)/target":/app-target \
   -v spring-shell-example-builder-m2:/root/.m2 \
