@@ -19,8 +19,22 @@ internal class TesztFormControllerTest {
         val driver = SeleniumDriver.getDriver()
         driver.get(tesztFormController.tesztFormUrl(DOCKER_HOST_IP))
         driver
-            .findById("cimsor")
+            .findTagById("cimsor")
             .assertTextContains("Teszt form")
+        driver
+            .findInputById("tesztform.felhasznalonev")
+            .write("Felhasználónév")
+        driver
+            .findInputById("tesztform.szam")
+            .write("12")
+
+        driver
+            .findButtonById("mentesgomb")
+            .click()
+
+        driver
+            .findTagById("lastcommand")
+            .assertTextContains("Text:Felhasználónév, Szam: 12")
     }
 
 }

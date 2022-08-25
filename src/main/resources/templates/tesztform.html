@@ -16,6 +16,7 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 
+<p id="lastcommand" th:text="'Text:' + ${formCommand.text} + ', Szam: ' + ${formCommand.szam}"></p>
 <form th:action="@{/tesztform}" method="post"
       th:object="${formCommand}">
     <h1 id="cimsor">Teszt form</h1>
@@ -25,6 +26,7 @@
                    class="form-control"
                    name="nev"
                    placeholder="Szöveg"
+                   id="tesztform.felhasznalonev"
                    th:field="*{text}"
                    th:classappend="${#fields.hasErrors('text')} ? 'is-invalid' : 'is-valid'"/>
             <div class="invalid-feedback"
@@ -39,7 +41,7 @@
             <input type="number"
                    class="form-control"
                    name="szam"
-                   placeholder="Jelszó"
+                   id="tesztform.szam"
                    th:field="*{szam}"
                    th:classappend="${#fields.hasErrors('szam')} ? 'is-invalid' : 'is-valid'"/>
             <div class="invalid-feedback"
@@ -49,7 +51,7 @@
             </div>
         </label>
         <div>
-            <input class="btn btn-success" type="submit" value="Mentés"/>
+            <input id="mentesgomb" class="btn btn-success" type="submit" value="Mentés"/>
         </div>
     </div>
 </form>

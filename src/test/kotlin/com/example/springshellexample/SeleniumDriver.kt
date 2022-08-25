@@ -10,7 +10,9 @@ import java.nio.file.Path
 
 class SeleniumDriver(private val driver: RemoteWebDriver) {
     fun get(url: String) = driver.get(url)
-    fun findById(id: String) = SeleniumElement(driver.findElement(By.id(id)))
+    fun findTagById(id: String) = SeleniumElement(driver.findElement(By.id(id)))
+    fun findInputById(id: String) = SeleniumInput(driver.findElement(By.id(id)))
+    fun findButtonById(id: String) = SeleniumButton(driver.findElement(By.id(id)))
 
     companion object {
         private var instance: SeleniumDriver? = null
@@ -32,6 +34,17 @@ class SeleniumDriver(private val driver: RemoteWebDriver) {
             }
         }
     }
+}
+
+class SeleniumButton(private val element: WebElement) {
+    fun click() = element.click()
+}
+
+class SeleniumInput(private val element: WebElement) {
+    fun write(text: String) {
+        element.sendKeys(text)
+    }
+
 }
 
 class SeleniumElement(private val element: WebElement) {
