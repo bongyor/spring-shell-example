@@ -1,33 +1,32 @@
 package com.example.springshellexample.tesztform
 
+import com.example.springshellexample.Selenium
 import com.example.springshellexample.SeleniumTest
-import com.example.springshellexample.SeleniumTestBase
-import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.springframework.beans.factory.annotation.Autowired
 
 @SeleniumTest
-internal class TesztFormControllerTest : SeleniumTestBase() {
-    @BeforeEach
-    internal fun setUp() {
-        get("tesztform")
-    }
+internal class TesztFormControllerTest {
+
+    @Autowired
+    private lateinit var selenium: Selenium
 
     @Test
-    fun tesztForm() {
-        findTagById("cimsor")
-            .assertTextContains("Teszt form")
-        findInputById("tesztform.felhasznalonev")
-            .write("Felhasználónév")
-        findInputById("tesztform.szam")
-            .write("12")
-        findTagById("lastcommand")
-            .assertTextNotContains("Text:Felhasználónév, Szam: 12")
-
-        findButtonById("mentesgomb")
-            .click()
-
-        findTagById("lastcommand")
-            .assertTextContains("Text:Felhasználónév, Szam: 12")
+    @DisplayName("Teszt form kipróbálása")
+    internal fun tesztFormDsl() {
+        selenium.pageTest("tesztform") {
+            tagById("cimsor") { assertTextContains("Teszt form") }
+            inputById("tesztform.felhasznalonev") { write("Felhasználónév") }
+            inputById("tesztform.szam") { write("12") }
+            tagById("lastcommand") {
+                assertTextContains("Text:, Szam: 0")
+                assertTextNotContains("Text:Felhasználónév, Szam: 12")
+            }
+            findButtonById("mentesgomb") { click() }
+            tagById("lastcommand") {
+                assertTextContains("Text:Felhasználónév, Szam: 12")
+            }
+        }
     }
-
 }
