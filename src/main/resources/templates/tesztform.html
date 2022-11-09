@@ -30,6 +30,7 @@
                    th:field="*{text}"
                    th:classappend="${#fields.hasErrors('text')} ? 'is-invalid' : 'is-valid'"/>
             <div class="invalid-feedback"
+                 id="tesztform.felhasznalonev.error"
                  th:if="${#fields.hasErrors('text')}"
                  th:errors="*{text}">
                 Hibaüzenet
@@ -45,6 +46,7 @@
                    th:field="*{szam}"
                    th:classappend="${#fields.hasErrors('szam')} ? 'is-invalid' : 'is-valid'"/>
             <div class="invalid-feedback"
+                 id="tesztform.szam.error"
                  th:if="${#fields.hasErrors('szam')}"
                  th:errors="*{szam}">
                 Hibaüzenet
