@@ -1,8 +1,10 @@
 package com.example.springshellexample.tesztform
 
 import com.example.springshellexample.ServerPortService
+import jakarta.validation.Valid
+import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.Positive
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.shell.standard.ShellComponent
 import org.springframework.shell.standard.ShellMethod
 import org.springframework.stereotype.Controller
@@ -11,9 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PostMapping
 import java.net.InetAddress
-import javax.validation.Valid
-import javax.validation.constraints.NotBlank
-import javax.validation.constraints.Positive
 
 data class FormCommand(
     @field:NotBlank(message = "Az érték nem lehet üres!")

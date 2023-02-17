@@ -6,10 +6,7 @@ import com.example.springshellexample.SeleniumTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import org.openqa.selenium.By
-import org.openqa.selenium.WebDriver
 import org.springframework.beans.factory.annotation.Autowired
-import java.lang.Exception
 
 @SeleniumTest
 internal class TesztFormControllerTest {
